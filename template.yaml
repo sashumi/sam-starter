@@ -16,14 +16,6 @@ Resources:
     Properties:
       BucketName: sashumi-sam-test-241120
       AccessControl: Private
-      LifecycleConfiguration:
-        Rules:
-          - Id: GlacierRule
-            Status: Enabled
-            ExpirationInDays: '30'
-            Transitions:
-              - TransitionInDays: '7'
-                StorageClass: GLACIER
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
