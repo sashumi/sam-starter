@@ -24,7 +24,7 @@ jobs:
       - name: sam deploy
         uses: youyo/aws-sam-action/python3.8@v2
         with:
-          sam_command: 'deploy --no-fail-on-empty-changeset --no-confirm-changeset --stack-name hello1 --region ${{ secrets.AWS_REGION }} --capabilities CAPABILITY_IAM '
+          sam_command: 'deploy --no-fail-on-empty-changeset --no-confirm-changeset --stack-name hello1 --region ${{ secrets.AWS_REGION }} --capabilities CAPABILITY_IAM --s3-bucket  sashumi-sam-src'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
