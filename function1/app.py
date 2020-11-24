@@ -1,7 +1,10 @@
 import json
 
 # import requests
+import logging
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     """Sample pure Lambda function
@@ -32,6 +35,7 @@ def lambda_handler(event, context):
     #     print(e)
 
     #     raise e
+    logger.info("event was: %s", event)
 
     return {
         "statusCode": 200,
