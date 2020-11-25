@@ -11,17 +11,6 @@ Globals:
     Timeout: 3
 
 Resources:
-  S3Primary:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: sashumi-sam-test-241120
-      AccessControl: Private
-      BucketEncryption:
-        ServerSideEncryptionConfiguration:
-          - ServerSideEncryptionByDefault:
-              SSEAlgorithm: AES256
-    DeletionPolicy: Delete
-
   Function1:
     Type: AWS::Serverless::Function
     Properties:
@@ -35,6 +24,24 @@ Resources:
             Path: /hello
             Method: get
 
+  S3Primary:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: sashumi-sam-test-241120
+      AccessControl: Private
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: "s3:ObjectCreated:Put"
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: suffix
+                    Value: csv
+            Function: !GetAtt Function1.Arn
 Outputs:
   Function1Api:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
